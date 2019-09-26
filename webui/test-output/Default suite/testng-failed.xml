@@ -6,16 +6,4 @@
       <class name="autothon.webui.tests.DriverSuite"/>
     </classes>
   </test> <!-- Default test -->
-  <test name="Default test(failed)">
-    <classes>
-      <class name="autothon.webui.tests.DriverSuite">
-        <methods>
-          <include name="FirstTest"/>
-          <include name="setUp"/>
-          <include name="afterMethod"/>
-          <include name="beforeSuite"/>
-        </methods>
-      </class> <!-- autothon.webui.tests.DriverSuite -->
-    </classes>
-  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
