@@ -1,4 +1,4 @@
-package autothon.webui;
+package autothon.webui.tests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
