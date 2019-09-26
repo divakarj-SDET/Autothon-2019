@@ -3,10 +3,13 @@ package autothon.webui.utils;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import org.apache.log4j.Logger;
+
 
 public class GenericUtils {
-
-	private static GenericUtils instance;
+	static Logger log = Logger.getLogger(GenericUtils.class);
+	
+    private static GenericUtils instance;
     private static final Object lock = new Object();
     private String strBrowserName;
     private String strURL;
@@ -69,4 +72,6 @@ public class GenericUtils {
     public String getStrPassWord() {
         return strPassWord;
     }
+    
+    
 }

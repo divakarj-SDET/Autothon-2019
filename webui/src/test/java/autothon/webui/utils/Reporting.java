@@ -14,7 +14,8 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import autothon.webui.pages.PageUtils;
+import autothon.webui.pages.BasePage;
+
 
 public class Reporting {
 
@@ -64,7 +65,7 @@ public class Reporting {
     private static String takeScreenShot() throws IOException {
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         String destination = System.getProperty("user.dir")+"\\testScreenShot\\"+strTestCaseName+"_"+dateName+".png";
-        File scrFile = ((TakesScreenshot)new PageUtils().getDriver()).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot)new BasePage().getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(destination));
 
         return destination;

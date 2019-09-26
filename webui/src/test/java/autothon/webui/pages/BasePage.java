@@ -1,32 +1,36 @@
 package autothon.webui.pages;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import autothon.webui.utils.GenericUtils;
 import autothon.webui.utils.Reporting;
 
-public class PageUtils {
+public class BasePage {
 
 	private static WebDriver driver;
     private static String strDriverPath = System.getProperty("user.dir")+"//resources//Drivers";
 
     public  WebDriver getDriver() {
-        return driver;
+    	return driver;
     }
 
     public void closeDriver(){
         driver.close();
         driver.quit();
     }
+    
     public void launchDriver() throws IOException {
         String strBrowserName = GenericUtils.getInstance().getStrBrowserName();
         try {
@@ -39,7 +43,7 @@ public class PageUtils {
                     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                     Reporting.PassTest(strBrowserName+" should open", "Browser successfully launched");
                     break;
-
+                
                 default :
                     Reporting.FailTest(strBrowserName+" should open", "Invalid browser name");
             }
@@ -50,7 +54,7 @@ public class PageUtils {
         }
 
     }
-
+    
 
     protected void validateandSendKeys(WebElement element, String strTestBoxName, String strtextBoxValue) throws IOException {
         try {
@@ -100,21 +104,21 @@ public class PageUtils {
         }
     }
 
-    /**
-     * This method is used to navigate to default URL
-     * @throws Exception
-     */
-    public void navigateToURL() throws Exception {
-        String strURL = GenericUtils.getInstance().getStrURL();
-        try {
-            getDriver().get(strURL);
-            Reporting.PassTest(strURL+"should be opened", "Opened and loaded successfully successfull");
-        }
-        catch(Exception e) {
-            Reporting.FailTest(strURL+"should be opened", e.getMessage());
-        }
+   /** This method is used to navigate to URL based on the config requirements
+    * @param strURL
+    * @throws Exception
+    */
+   public void navigateToURL() throws Exception {
 
-    }
+       try {
+           getDriver().get(GenericUtils.getInstance().getStrURL());
+           Reporting.PassTest(GenericUtils.getInstance().getStrURL()+"should be opened", "Opened and loaded successfully successfull");
+       }
+       catch(Exception e) {
+           Reporting.FailTest(GenericUtils.getInstance().getStrURL()+"should be opened", e.getMessage());
+       }
+
+   }
 
     /**
      * This method is used to navigate to specific URL based on the test case requirements
@@ -145,4 +149,7 @@ public class PageUtils {
         }
 
     }
+    
+   
+
 }
