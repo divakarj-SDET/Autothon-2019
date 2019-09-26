@@ -17,7 +17,7 @@ import autothon.webui.utils.Reporting;
 public class PageUtils {
 
 	private static WebDriver driver;
-    private static String strDriverPath = System.getProperty("user.dir")+"//Libs//Driver";
+    private static String strDriverPath = System.getProperty("user.dir")+"//resources//Drivers";
 
     public  WebDriver getDriver() {
         return driver;
@@ -35,6 +35,7 @@ public class PageUtils {
                 case "CHROME":
                     System.setProperty("webdriver.chrome.driver", strDriverPath+"//chromedriver.exe");
                     driver = new ChromeDriver();
+                    driver.manage().window().maximize();
                     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                     Reporting.PassTest(strBrowserName+" should open", "Browser successfully launched");
                     break;
@@ -53,7 +54,7 @@ public class PageUtils {
 
     protected void validateandSendKeys(WebElement element, String strTestBoxName, String strtextBoxValue) throws IOException {
         try {
-            if(element.isEnabled()) {
+            if(element!=null) {
                 element.clear();
                 element.sendKeys(strtextBoxValue);
                 System.out.println("Value entered in"+strTestBoxName+" is "+strtextBoxValue);
@@ -69,7 +70,7 @@ public class PageUtils {
 
     protected void validateandclick(WebElement element,String strButtonName) throws Exception {
         try {
-            if(element.isEnabled()) {
+            if(element!=null) {
                 element.click();
                 System.out.println("Button clicked in: "+strButtonName);
                 Reporting.PassTest(strButtonName+"should be clicked", "button/radio/checkbox is successfully clicked");
@@ -85,7 +86,7 @@ public class PageUtils {
 
     protected void validateandHovering(WebElement element,String strTextName) throws IOException {
         try {
-            if(element.isEnabled()) {
+            if(element!=null) {
                 Actions action = new Actions(driver);
                 action.moveToElement(element).perform();
                 System.out.println("Hovering in: "+strTextName);
