@@ -20,7 +20,7 @@ import autothon.webui.utils.Reporting;
 public class BasePage {
 
 	private static WebDriver driver;
-    private static String strDriverPath = System.getProperty("user.dir")+"//resources//Drivers";
+    private static String strDriverPath = System.getProperty("user.dir")+"\\resources\\Drivers";
 
     public  WebDriver getDriver() {
     	return driver;
@@ -31,26 +31,26 @@ public class BasePage {
         driver.quit();
     }
     
-    public void launchDriver() throws IOException {
-        String strBrowserName = GenericUtils.getInstance().getStrBrowserName();
+    public void launchDriver(String strBrowser) throws IOException {
+        
         try {
 
-            switch(strBrowserName.toUpperCase()){
+            switch(strBrowser.toUpperCase()){
                 case "CHROME":
                     System.setProperty("webdriver.chrome.driver", strDriverPath+"//chromedriver.exe");
                     driver = new ChromeDriver();
                     driver.manage().window().maximize();
                     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                    Reporting.PassTest(strBrowserName+" should open", "Browser successfully launched");
+                    Reporting.PassTest(strBrowser+" should open", "Browser successfully launched");
                     break;
                 
                 default :
-                    Reporting.FailTest(strBrowserName+" should open", "Invalid browser name");
+                    Reporting.FailTest(strBrowser+" should open", "Invalid browser name");
             }
         }
         catch(Exception e) {
             System.out.println(e.getMessage());
-            Reporting.FailTest(strBrowserName+" should open", e.getMessage());
+            Reporting.FailTest(strBrowser+" should open", e.getMessage());
         }
 
     }

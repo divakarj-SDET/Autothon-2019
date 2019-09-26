@@ -3,6 +3,8 @@ package autothon.webui.utils;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -23,6 +25,7 @@ public class Reporting {
     private static ExtentTest logger;
     private static String strTestCaseName;
     static boolean bflagLogger = false;
+    private static String dateName;
     public void setTestCaseName(String strTestCaseName) {
         this.strTestCaseName = strTestCaseName;
         logger = extent.startTest(strTestCaseName);
@@ -30,7 +33,8 @@ public class Reporting {
 
     public void startReporting() {
         try {
-            extent = new ExtentReports (System.getProperty("user.dir") +"/test-output/STMExtentReport.html", true);
+        	String time_stamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmss"));
+            extent = new ExtentReports (System.getProperty("user.dir") +"/test-output/STMExtentReport/"+time_stamp+".html", true);
             extent
                     .addSystemInfo("Environment", "Automation Testing")
                     .addSystemInfo("User Name", System.getProperty("user.name"));
@@ -41,7 +45,7 @@ public class Reporting {
         }
     }
 
-    public static void PassTest(String strExpected, String strActual) {
+    public static void PassTest(String strExpected, String strActual) throws IOException {
         logger.log(LogStatus.PASS, strActual, strExpected);
         Assert.assertTrue(true);
 
@@ -49,7 +53,6 @@ public class Reporting {
 
     public static void FailTest(String strExpected, String strActual) throws IOException {
         logger.log(LogStatus.FAIL, strActual, strExpected);
-        logger.log(LogStatus.FAIL, logger.addScreenCapture(takeScreenShot()));
         Assert.assertTrue(false,strActual);
         extent.endTest(logger);
         bflagLogger=true;
@@ -63,7 +66,7 @@ public class Reporting {
     }
 
     private static String takeScreenShot() throws IOException {
-        String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         String destination = System.getProperty("user.dir")+"\\testScreenShot\\"+strTestCaseName+"_"+dateName+".png";
         File scrFile = ((TakesScreenshot)new BasePage().getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(destination));

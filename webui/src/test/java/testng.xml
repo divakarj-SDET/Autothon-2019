@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="false">
   <test name="Test">
+  <parameter name="strBrowser" value="chrome" />
     <classes>
       <class name="autothon.webui.tests.DriverSuite"/>
+      <methods>
+           <include name="prameterTestTwo" />
+      </methods>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
