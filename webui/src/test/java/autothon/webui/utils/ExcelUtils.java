@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelUtils {
 
 	private static StringBuilder excelFilePath = new StringBuilder(System.getProperty("user.dir"));
-	private static Workbook wb = null;
+	private static Workbook wb;
 	private static Sheet sheet;
 	private static int iTestCaseIdColumn;
 	private static int iTestCaseIdRow;
@@ -22,8 +22,7 @@ public class ExcelUtils {
 	
 	
 	public static String getExcelData(String strFileNameWithExtension, String strTestcaseId, String strSheetName, String strColumnName) throws Exception{
-		Map<String,String> excelData = new HashMap<>();
-		
+				
 		File file =    new File(excelFilePath+"\\resources\\TestData\\"+strFileNameWithExtension);
 		
 		FileInputStream inputStream = new FileInputStream(file);
