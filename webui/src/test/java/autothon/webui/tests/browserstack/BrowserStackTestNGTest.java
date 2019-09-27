@@ -1,4 +1,4 @@
-package autothon.webui.browserstack.tests;
+package autothon.webui.tests.browserstack;
 
 import com.browserstack.local.Local;
 

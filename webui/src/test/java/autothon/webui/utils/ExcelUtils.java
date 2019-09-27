@@ -20,7 +20,15 @@ public class ExcelUtils {
 	private static int iTestCaseIdRow;
 	private static Row row;
 	
-	
+	/**
+	 * This method will read the value of a specied column for a named test case in the first column
+	 * @param strFileNameWithExtension
+	 * @param strTestcaseId
+	 * @param strSheetName
+	 * @param strColumnName
+	 * @return
+	 * @throws Exception
+	 */
 	public static String getExcelData(String strFileNameWithExtension, String strTestcaseId, String strSheetName, String strColumnName) throws Exception{
 				
 		File file =    new File(excelFilePath+"\\resources\\TestData\\"+strFileNameWithExtension);

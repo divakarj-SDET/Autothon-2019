@@ -19,6 +19,11 @@ public class GenericUtils {
 
     private String strCurrentDirectory = System.getProperty("user.dir");
 
+    /**
+     * This method is used to initiated the properties file
+     * @return
+     * @throws IOException
+     */
     public static GenericUtils getInstance() throws IOException {
         if (instance == null) {
             synchronized (lock) {
@@ -31,6 +36,10 @@ public class GenericUtils {
 
 
 
+    /**
+     * This method is used to read the properties file and set the values
+     * @throws IOException
+     */
     private void readPropFile() throws IOException {
         Properties prop = new Properties();
         String strConfigPropFile = strCurrentDirectory+"\\config.properties";
@@ -53,22 +62,42 @@ public class GenericUtils {
 
     }
 
+    /**
+     * This is getter for browser name
+     * @return
+     */
     public String getStrBrowserName() {
         return strBrowserName;
     }
 
+    /**
+     * This is getter for URL
+     * @return
+     */
     public String getStrURL() {
         return strURL;
     }
 
+    /**
+     * This is getter for username
+     * @return
+     */
     public String getStrUserName() {
         return strUserName;
     }
 
+    /**
+     * This is getter for timeouts
+     * @return
+     */
     public String getStrTimeOuts() {
         return strTimeOuts;
     }
 
+    /**
+     * This is getter for password
+     * @return
+     */
     public String getStrPassWord() {
         return strPassWord;
     }
