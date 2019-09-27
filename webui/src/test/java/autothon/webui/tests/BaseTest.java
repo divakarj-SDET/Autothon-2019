@@ -21,8 +21,10 @@ public class BaseTest {
 	 protected static BasePage oBasepage = new BasePage();
 	 
 	 @BeforeMethod
-	  public void beforeMethod(@Optional Method method) throws IOException {
+	 @Parameters({"strBrowser"})
+	  public void beforeMethod(@Optional Method method,String strBrowser) throws IOException {
 		 oReporting.setTestCaseName(method.getName());
+		 oBasepage.launchDriver(strBrowser);
 	}
 
 	  @AfterMethod

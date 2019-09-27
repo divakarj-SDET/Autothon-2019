@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Test">
+  <parameter name="config" value="single.config.json"/>
+  <parameter name="environment" value="chrome"/>
+    <classes>
+      <class name="autothon.webui.browserstack.tests.Tests">
+      <methods>
+           <include name="f" />
+      </methods>
+      </class>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

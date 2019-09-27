@@ -9,7 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,15 +25,27 @@ public class BasePage {
 	private static WebDriver driver;
     private static String strDriverPath = System.getProperty("user.dir")+"\\resources\\Drivers";
 
+    /**
+     * This method returns the driver
+     * @return
+     */
     public  WebDriver getDriver() {
     	return driver;
     }
 
+    /**
+     * This method close and quite the driver in execution
+     */
     public void closeDriver(){
         driver.close();
         driver.quit();
     }
     
+    /**
+     * This method will launch browser for action. Accepted parameters are ie,chrome,firefox
+     * @param strBrowser
+     * @throws IOException
+     */
     public void launchDriver(String strBrowser) throws IOException {
         
         try {
@@ -43,7 +58,15 @@ public class BasePage {
                     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                     Reporting.PassTest(strBrowser+" should open", "Browser successfully launched");
                     break;
-                
+                case "IE":
+                	System.setProperty("webdriver.ie.driver", strDriverPath+"//IEDriverServer.exe");
+                	DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+                	capability.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+                	capability.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR, 1); 
+                	capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                	capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);        
+                	driver = new InternetExplorerDriver(capability);
+                	break;
                 default :
                     Reporting.FailTest(strBrowser+" should open", "Invalid browser name");
             }
