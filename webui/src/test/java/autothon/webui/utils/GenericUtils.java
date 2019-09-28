@@ -12,16 +12,12 @@ public class GenericUtils {
     private static GenericUtils instance;
     private static final Object lock = new Object();
     private String strPassWord;
-    
-   
-
-
-
+    private String strTimeOuts;
 	private String strUiURL;
     private String strApiURL;
     private String strUser;
     private String strAdmin;
-    private String strCurrentDirectory = System.getProperty("user.dir");
+    private String strCurrentDirectory = System.getProperty("user.dir")+"\\resources";
 
     /**
      * This method is used to initiated the properties file
@@ -50,20 +46,21 @@ public class GenericUtils {
         //Read configuration.properties file
         try {
             prop.load(new FileInputStream(strConfigPropFile));
-            //prop.load(this.getClass().getClassLoader().getResourceAsStream("configuration.properties"));
-        } catch (IOException e) {
-            Reporting.FailTest("Properties file should be found","Configuraiton propeprties file cannot be found");
             try {
                 strUiURL = prop.getProperty("ui.url");
                 strApiURL = prop.getProperty("api.url");
                 strUser = prop.getProperty("user.username");
-                strAdmin = prop.getProperty("user.username");
+                strAdmin = prop.getProperty("admin.username");
                 strPassWord = prop.getProperty("password");
-                
+                strTimeOuts = prop.getProperty("timeouts");
                 
             }catch(Exception propertyException){
                 Reporting.FailTest("All values should be fetched from properties",propertyException.getMessage());
             }
+            //prop.load(this.getClass().getClassLoader().getResourceAsStream("configuration.properties"));
+        } catch (IOException e) {
+            Reporting.FailTest("Properties file should be found","Configuraiton propeprties file cannot be found");
+            
 
         }
 
@@ -97,5 +94,8 @@ public class GenericUtils {
 		return strAdmin;
 	}
    
+	public String getStrTimeOuts() {
+		return strTimeOuts;
+	}
     
 }

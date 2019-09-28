@@ -14,7 +14,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import autothon.webui.utils.GenericUtils;
@@ -25,12 +27,17 @@ public class BasePage {
 	private static WebDriver driver;
     private static String strDriverPath = System.getProperty("user.dir")+"\\resources\\Drivers";
 
+    public BasePage() {
+    	PageFactory.initElements(driver, this);
+    }
+    
     /**
      * This method returns the driver
      * @return
      */
     public  WebDriver getDriver() {
     	return driver;
+    	
     }
 
     /**
@@ -127,22 +134,6 @@ public class BasePage {
         }
     }
 
-   /** This method is used to navigate to URL based on the config requirements
-    * @param strURL
-    * @throws Exception
-    */
-   public void navigateToURL() throws Exception {
-
-       try {
-           getDriver().get(GenericUtils.getInstance().getStrURL());
-           Reporting.PassTest(GenericUtils.getInstance().getStrURL()+"should be opened", "Opened and loaded successfully successfull");
-       }
-       catch(Exception e) {
-           Reporting.FailTest(GenericUtils.getInstance().getStrURL()+"should be opened", e.getMessage());
-       }
-
-   }
-
     /**
      * This method is used to navigate to specific URL based on the test case requirements
      * @param strURL
@@ -173,6 +164,18 @@ public class BasePage {
 
     }
     
-   
+   public void validateandSelect(WebElement element, String strValue) throws Exception{
+	   String strTimeunits = GenericUtils.getInstance().getStrTimeOuts();
+	   try {
+           WebDriverWait wait = new WebDriverWait(driver, Integer.parseInt(strTimeunits));
+           wait.until(ExpectedConditions.visibilityOf(element));
+           
+           Select select = new Select(element);
+           select.selectByValue(strValue);
+           Reporting.PassTest(strValue+" should be displayed and selected",strValue+" should be displayed and visible");
+       }catch (Exception e){
+           Reporting.FailTest(strValue+" should be displayed",e.getMessage());
+       }
+   }
 
 }
