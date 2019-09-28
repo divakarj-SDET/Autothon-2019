@@ -25,10 +25,17 @@ import autothon.webui.utils.Reporting;
 public class BasePage {
 
 	private static WebDriver driver;
-    private static String strDriverPath = System.getProperty("user.dir")+"\\resources\\Drivers";
+    
+	private static String strDriverPath = System.getProperty("user.dir")+"\\resources\\Drivers";
 
     public BasePage() {
     	PageFactory.initElements(driver, this);
+    }
+    
+    
+    public void setDriver(WebDriver driver) {
+    	this.driver = driver;
+    	
     }
     
     /**

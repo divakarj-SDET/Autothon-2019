@@ -60,8 +60,11 @@ public class DriverSuite extends BaseTest{
 		 oLoginPage = new LoginPage();
 		 oHomePage = new HomePage();
 		 oLoginPage.loginAsUser(oLoginData);
-		 oHomePage.verifyMovieListed("Dirty Grandpa");
+		 oHomePage.verifyMovieListed(/*strTitle*/"Dirty Grandpa");
   }
  
+  public void addAndVerifyParallel() throws Exception{
+	  
+  }
 
 }
