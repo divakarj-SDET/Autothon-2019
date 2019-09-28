@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="false">
   <test name="Test">
-  <parameter name="config" value="config.json"/>
+  <parameter name="config" value="local.config.json"/>
   <parameter name="environment" value="chrome"/>
     <classes>
-      <class name="autothon.webui.browserstack.tests.LocalTest"/>
+      <class name="autothon.webui.tests.browserstack.Tests"/>
       <methods>
            <include name="test" />
       </methods>
