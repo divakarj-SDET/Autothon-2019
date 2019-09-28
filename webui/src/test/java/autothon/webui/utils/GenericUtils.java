@@ -11,12 +11,16 @@ public class GenericUtils {
 	
     private static GenericUtils instance;
     private static final Object lock = new Object();
-    private String strBrowserName;
-    private String strURL;
-    private String strUserName;
-    private String strTimeOuts;
     private String strPassWord;
+    
+   
 
+
+
+	private String strUiURL;
+    private String strApiURL;
+    private String strUser;
+    private String strAdmin;
     private String strCurrentDirectory = System.getProperty("user.dir");
 
     /**
@@ -50,10 +54,13 @@ public class GenericUtils {
         } catch (IOException e) {
             Reporting.FailTest("Properties file should be found","Configuraiton propeprties file cannot be found");
             try {
-                strURL = prop.getProperty("url");
-                strBrowserName = prop.getProperty("browser");
-                strUserName = prop.getProperty("username");
+                strUiURL = prop.getProperty("ui.url");
+                strApiURL = prop.getProperty("api.url");
+                strUser = prop.getProperty("user.username");
+                strAdmin = prop.getProperty("user.username");
                 strPassWord = prop.getProperty("password");
+                
+                
             }catch(Exception propertyException){
                 Reporting.FailTest("All values should be fetched from properties",propertyException.getMessage());
             }
@@ -62,45 +69,33 @@ public class GenericUtils {
 
     }
 
-    /**
-     * This is getter for browser name
-     * @return
-     */
-    public String getStrBrowserName() {
-        return strBrowserName;
-    }
-
-    /**
-     * This is getter for URL
-     * @return
-     */
-    public String getStrURL() {
-        return strURL;
-    }
-
-    /**
-     * This is getter for username
-     * @return
-     */
-    public String getStrUserName() {
-        return strUserName;
-    }
-
-    /**
-     * This is getter for timeouts
-     * @return
-     */
-    public String getStrTimeOuts() {
-        return strTimeOuts;
-    }
-
-    /**
-     * This is getter for password
-     * @return
-     */
     public String getStrPassWord() {
-        return strPassWord;
-    }
-    
+		return strPassWord;
+	}
+
+
+
+	public String getStrUiURL() {
+		return strUiURL;
+	}
+
+
+
+	public String getStrApiURL() {
+		return strApiURL;
+	}
+
+
+
+	public String getStrUser() {
+		return strUser;
+	}
+
+
+
+	public String getStrAdmin() {
+		return strAdmin;
+	}
+   
     
 }
