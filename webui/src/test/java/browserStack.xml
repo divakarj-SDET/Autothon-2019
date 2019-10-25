@@ -1,14 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="false">
   <test name="Test">
   <parameter name="config" value="single.config.json"/>
   <parameter name="environment" value="chrome"/>
     <classes>
-      <class name="autothon.webui.browserstack.tests.Tests">
-      <methods>
-           <include name="f" />
-      </methods>
-      </class>
+      <class name="autothon.webui.browserstack.tests.Tests"/>
+     
+      
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

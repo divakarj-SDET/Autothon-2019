@@ -6,21 +6,14 @@
 
   "capabilities": {
     "name": "Bstack-[TestNG] Local Test",
-    "browserstack.local": true
+    "browserstack.local": true,
+    "browserstack.networkLogs" :true,
+    "browserstack.idleTimeout":32000
   },
 
   "environments": {
     "chrome": {
       "browser": "chrome"
-    },
-    "firefox": {
-      "browser": "firefox"
-    },
-    "safari": {
-      "browser": "safari"
-    },
-    "ie": {
-      "browser": "internet explorer"
     }
   }
 }

@@ -64,26 +64,26 @@ public class BasePage {
         
         try {
 
-            switch(strBrowser.toUpperCase()){
-                case "CHROME":
-                    System.setProperty("webdriver.chrome.driver", strDriverPath+"//chromedriver.exe");
-                    driver = new ChromeDriver();
-                    driver.manage().window().maximize();
-                    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                    Reporting.PassTest(strBrowser+" should open", "Browser successfully launched");
-                    break;
-                case "IE":
-                	System.setProperty("webdriver.ie.driver", strDriverPath+"//IEDriverServer.exe");
-                	DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
-                	capability.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-                	capability.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR, 1); 
-                	capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                	capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);        
-                	driver = new InternetExplorerDriver(capability);
-                	break;
-                default :
-                    Reporting.FailTest(strBrowser+" should open", "Invalid browser name");
+            if(strBrowser.toUpperCase().equalsIgnoreCase("chrome")){
+                
+                System.setProperty("webdriver.chrome.driver", strDriverPath+"//chromedriver.exe");
+                driver = new ChromeDriver();
+                driver.manage().window().maximize();
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                Reporting.PassTest(strBrowser+" should open", "Browser successfully launched");
             }
+            else if(strBrowser.toUpperCase().equalsIgnoreCase("ie")) {
+            	System.setProperty("webdriver.ie.driver", strDriverPath+"//IEDriverServer.exe");
+            	DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+            	capability.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+            	capability.setCapability(InternetExplorerDriver.ELEMENT_SCROLL_BEHAVIOR, 1); 
+            	capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            	capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);        
+            	driver = new InternetExplorerDriver(capability);
+            }
+            else
+                Reporting.FailTest(strBrowser+" should open", "Invalid browser name");
+            
         }
         catch(Exception e) {
             System.out.println(e.getMessage());

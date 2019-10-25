@@ -17,6 +17,7 @@ public class GenericUtils {
     private String strApiURL;
     private String strUser;
     private String strAdmin;
+    private String strParallelBrowser;
     private String strCurrentDirectory = System.getProperty("user.dir")+"\\resources";
 
     /**
@@ -53,6 +54,7 @@ public class GenericUtils {
                 strAdmin = prop.getProperty("admin.username");
                 strPassWord = prop.getProperty("password");
                 strTimeOuts = prop.getProperty("timeouts");
+                strParallelBrowser = prop.getProperty("parallelbrowser");
                 
             }catch(Exception propertyException){
                 Reporting.FailTest("All values should be fetched from properties",propertyException.getMessage());
@@ -98,4 +100,7 @@ public class GenericUtils {
 		return strTimeOuts;
 	}
     
+	public String strParallelBrowser() {
+		return strParallelBrowser;
+	}
 }

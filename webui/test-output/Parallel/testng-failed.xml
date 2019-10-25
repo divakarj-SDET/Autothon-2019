@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Parallel]" parallel="tests">
+  <parameter name="environment" value="firefox"/>
+  <parameter name="config" value="parallel.config.json"/>
+  <test name="TestChrome">
+    <parameter name="environment" value="chrome"/>
+    <parameter name="config" value="parallel.config.json"/>
+    <classes>
+      <class name="autothon.webui.browserstack.tests.Tests">
+        <methods>
+          <include name="f"/>
+        </methods>
+      </class> <!-- autothon.webui.browserstack.tests.Tests -->
+    </classes>
+  </test> <!-- TestChrome -->
+  <test name="TestFirefox">
+    <parameter name="environment" value="firefox"/>
+    <parameter name="config" value="parallel.config.json"/>
+    <classes>
+      <class name="autothon.webui.browserstack.tests.Tests">
+        <methods>
+          <include name="f"/>
+        </methods>
+      </class> <!-- autothon.webui.browserstack.tests.Tests -->
+    </classes>
+  </test> <!-- TestFirefox -->
+  <test name="TestChrome(failed)" parallel="tests">
+    <parameter name="environment" value="chrome"/>
+    <parameter name="config" value="parallel.config.json"/>
+    <classes>
+      <class name="autothon.webui.browserstack.tests.Tests">
+        <methods>
+          <include name="f"/>
+          <include name="setUp"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- autothon.webui.browserstack.tests.Tests -->
+    </classes>
+  </test> <!-- TestChrome(failed) -->
+  <test name="TestFirefox(failed)" parallel="tests">
+    <parameter name="environment" value="firefox"/>
+    <parameter name="config" value="parallel.config.json"/>
+    <classes>
+      <class name="autothon.webui.browserstack.tests.Tests">
+        <methods>
+          <include name="f"/>
+          <include name="setUp"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- autothon.webui.browserstack.tests.Tests -->
+    </classes>
+  </test> <!-- TestFirefox(failed) -->
+</suite> <!-- Failed suite [Parallel] -->
